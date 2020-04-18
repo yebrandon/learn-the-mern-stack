@@ -4,7 +4,6 @@ import {
 	Modal,
 	ModalHeader,
 	ModalBody,
-	//ModalFooter,
 	Input,
 	Label,
 	Form,
@@ -51,9 +50,7 @@ class RegisterModal extends Component {
 	}
 
 	toggle = () => {
-		// Clear errors
 		this.props.clearErrors();
-
 		this.setState({
 			modal: !this.state.modal
 		});
@@ -65,7 +62,6 @@ class RegisterModal extends Component {
 
 	onSubmit = (e) => {
 		e.preventDefault();
-
 		const { name, email, password } = this.state;
 
 		// Create user object
@@ -77,9 +73,6 @@ class RegisterModal extends Component {
 
 		//Attempt to register
 		this.props.register(newUser);
-
-		// Close modal
-		//this.toggle();
 	};
 
 	render() {

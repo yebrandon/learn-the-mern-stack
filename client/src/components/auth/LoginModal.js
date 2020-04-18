@@ -4,7 +4,6 @@ import {
 	Modal,
 	ModalHeader,
 	ModalBody,
-	//ModalFooter,
 	Input,
 	Label,
 	Form,
@@ -50,9 +49,7 @@ class LoginModal extends Component {
 	}
 
 	toggle = () => {
-		// Clear errors
 		this.props.clearErrors();
-
 		this.setState({
 			modal: !this.state.modal
 		});

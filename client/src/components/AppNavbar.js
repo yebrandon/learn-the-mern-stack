@@ -1,8 +1,6 @@
-// Legacy Context API Warning
-
 import React, { Component, Fragment } from 'react';
 import {
-	Collapse,
+	Collapse, // Warning with React Strictmode by using react-transition-group
 	Navbar,
 	NavbarToggler,
 	NavbarBrand,

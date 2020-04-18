@@ -20,34 +20,33 @@ router.post('/', (req, res) => {
 	}
 
 	// Check for existing user
-	User.findOne({ email }) //email: email
-		.then(user => {
-			if (!user) {
-				return res.status(400).json({ msg: 'User does not exist' });
-			}
+	User.findOne({ email }).then((user) => {
+		if (!user) {
+			return res.status(400).json({ msg: 'User does not exist' });
+		}
 
-			// Validate password
-			bcrypt.compare(password, user.password).then(isMatch => {
-				if (!isMatch)
-					return res.status(400).json({ msg: 'Invalid credentials' });
+		// Validate password
+		bcrypt.compare(password, user.password).then((isMatch) => {
+			if (!isMatch)
+				return res.status(400).json({ msg: 'Invalid credentials' });
 
-				jwt.sign(
-					{ id: user.id },
-					config.get('jwtSecret'),
-					{ expiresIn: 3600 },
-					(err, token) => {
-						res.json({
-							token,
-							user: {
-								id: user.id,
-								name: user.name,
-								email: user.email
-							}
-						});
-					}
-				);
-			});
+			jwt.sign(
+				{ id: user.id },
+				config.get('jwtSecret'),
+				{ expiresIn: 3600 },
+				(err, token) => {
+					res.json({
+						token,
+						user: {
+							id: user.id,
+							name: user.name,
+							email: user.email
+						}
+					});
+				}
+			);
 		});
+	});
 });
 
 // @route   GET api/auth/user
@@ -56,7 +55,7 @@ router.post('/', (req, res) => {
 router.get('/user', auth, (req, res) => {
 	User.findById(req.user.id)
 		.select('-password')
-		.then(user => res.json(user));
+		.then((user) => res.json(user));
 });
 
 module.exports = router;

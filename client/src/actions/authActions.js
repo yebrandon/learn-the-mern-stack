@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { returnErrors } from './errorActions';
-
 import {
 	USER_LOADED,
 	USER_LOADING,
@@ -13,11 +12,8 @@ import {
 } from './types';
 
 // Check token & load user
-
 export const loadUser = () => (dispatch, getState) => {
-	// User loading
 	dispatch({ type: USER_LOADING });
-
 	axios
 		.get('/api/auth/user', tokenConfig(getState))
 		.then((res) =>
@@ -34,7 +30,6 @@ export const loadUser = () => (dispatch, getState) => {
 		});
 };
 
-// Register User
 export const register = ({ name, email, password }) => (dispatch) => {
 	// Headers
 	const config = {
@@ -68,7 +63,6 @@ export const register = ({ name, email, password }) => (dispatch) => {
 		});
 };
 
-// Login User
 export const login = ({ email, password }) => (dispatch) => {
 	// Headers
 	const config = {
@@ -76,6 +70,7 @@ export const login = ({ email, password }) => (dispatch) => {
 			'Content-type': 'application/json'
 		}
 	};
+
 	// Request body
 	const body = JSON.stringify({ email, password });
 
@@ -101,7 +96,6 @@ export const login = ({ email, password }) => (dispatch) => {
 		});
 };
 
-// Logout User
 export const logout = () => {
 	return {
 		type: LOGOUT_SUCCESS
